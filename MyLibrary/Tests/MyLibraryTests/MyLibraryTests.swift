@@ -101,4 +101,28 @@ final class MyLibraryTests: XCTestCase {
         XCTAssertNil(isLuckyNumber)
     }
 
+
+    func testMockServer() throws {
+        // Given
+      
+
+        let myLibrary = MyLibrary()
+        let number = 7
+        let expectation = XCTestExpectation(description: "Testing my mock server")
+        var isLuckyNumber: Bool?
+
+        // When
+        myLibrary.isLucky(number, completion: { lucky in
+            isLuckyNumber = lucky
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 5)
+
+        // Then
+        XCTAssertNotNil(isLuckyNumber)
+        //XCTAssert(isLuckyNumber == true)
+    }
+
+
 }
